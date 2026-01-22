@@ -1,8 +1,9 @@
-
 from textblob import TextBlob
 import json
 from pathlib import Path
-
+#change to pdf read 
+#extract text segments for formatting
+#options to search for specific data (names, keywords)
 def analyze_file(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     if not text.strip():
