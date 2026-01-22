@@ -1,9 +1,19 @@
 import string
 from textblob import TextBlob
+import json
 
+#text = input("Enter text: ")
+file_path = input("Enter file: ")
 
-text = input("Enter text: ")
-blob = TextBlob(text)
+with open(file_path, 'r') as file:
+    text = file.read()
+    blob = TextBlob(text)
+    
+sentiment = blob.sentiment
+    
+results = {
+    "polarity": sentiment.polarity,
+    "subjectivity": sentiment.subjectivity}
 
-print(blob.sentiment)
+print(json.dumps(blob.sentiment))
 
