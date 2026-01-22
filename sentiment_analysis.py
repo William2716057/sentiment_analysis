@@ -12,10 +12,18 @@ with open(file_path, 'r') as file:
     
 sentiment = blob.sentiment
 
+def label(polarity):
+    if polarity > 0.1:
+        return "positive"
+    elif polarity < -0.1:
+        return "negative"
+    return "neutral"
+
 #create results json output    
 results = {
     "polarity": sentiment.polarity,
-    "subjectivity": sentiment.subjectivity
+    "subjectivity": sentiment.subjectivity,
+    "Label": label(sentiment.polarity)
     }
 
 #print in json format
