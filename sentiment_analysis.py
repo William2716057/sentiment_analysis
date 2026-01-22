@@ -1,4 +1,12 @@
 import string
+from textblob import TextBlob
+
+
+text = input("Enter text: ")
+blob = TextBlob(text)
+
+print(blob.sentiment)
+
 
 # Dictionary of positive words
 POSITIVE_WORDS = {
@@ -39,8 +47,8 @@ def analyze_sentiment(text):
         "sentiment": sentiment
     }
 
-#user input
-if __name__ == "__main__":
-    text = input("Enter text: ")
-    result = analyze_sentiment(text)
-    print(result)
+#change to text file
+#if __name__ == "__main__":
+#    text = input("Enter text: ")
+#    result = analyze_sentiment(text)
+#    print(result)
