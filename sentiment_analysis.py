@@ -1,17 +1,30 @@
-import string
+#import string
 from textblob import TextBlob
 import json
+from pathlib import Path
 
 #enter user file 
-file_path = input("Enter file: ")
+#file_path = input("Enter file: ")
 
 #open file
-with open(file_path, 'r') as file:
-    text = file.read()
-    blob = TextBlob(text)
-    
-sentiment = blob.sentiment
+#with open(file_path, 'r') as file:
+#    text = file.read()
+#    blob = TextBlob(text)
 
+def analyze_file(path: Path) -> dict:
+    text = path.read_text(encoding="utf-8")
+    if not text.strip():
+        raise ValueError("File is empty")
+
+    blob = TextBlob(text)
+    sentiment = blob.sentiment
+    
+#sentiment = blob.sentiment
+    return {
+        "polarity": sentiment.polarity,
+        "subjectivity": sentiment.subjectivity,
+        "label": label(sentiment.polarity),
+    }
 def label(polarity):
     if polarity > 0.1:
         return "positive"
@@ -20,14 +33,27 @@ def label(polarity):
     return "neutral"
 
 #create results json output    
-results = {
-    "polarity": sentiment.polarity,
-    "subjectivity": sentiment.subjectivity,
-    "Label": label(sentiment.polarity)
-    }
+#results = {
+#    "polarity": sentiment.polarity,
+#    "subjectivity": sentiment.subjectivity,
+#    "label": label(sentiment.polarity)
+#    }
 
 #print in json format
-print(json.dumps(results, indent=2))
+#print(json.dumps(results, indent=2))
 
+def main():
+    file_path = Path(input("Enter file: ").strip())
+    
+    if not file_path.exists():
+        print("File not found.")
+        return
+    try:
+        results = analyze_file(file_path)
+        print(json.dumps(results, indent=2))
+    except Exception as e:
+        print(f"error: {e}")
+        
 
-
+if __name__ == "__main__":
+    main()
