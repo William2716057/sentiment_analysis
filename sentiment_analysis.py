@@ -1,15 +1,7 @@
-#import string
+
 from textblob import TextBlob
 import json
 from pathlib import Path
-
-#enter user file 
-#file_path = input("Enter file: ")
-
-#open file
-#with open(file_path, 'r') as file:
-#    text = file.read()
-#    blob = TextBlob(text)
 
 def analyze_file(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
@@ -19,7 +11,6 @@ def analyze_file(path: Path) -> dict:
     blob = TextBlob(text)
     sentiment = blob.sentiment
     
-#sentiment = blob.sentiment
     return {
         "polarity": sentiment.polarity,
         "subjectivity": sentiment.subjectivity,
@@ -31,16 +22,6 @@ def label(polarity):
     elif polarity < -0.1:
         return "negative"
     return "neutral"
-
-#create results json output    
-#results = {
-#    "polarity": sentiment.polarity,
-#    "subjectivity": sentiment.subjectivity,
-#    "label": label(sentiment.polarity)
-#    }
-
-#print in json format
-#print(json.dumps(results, indent=2))
 
 def main():
     file_path = Path(input("Enter file: ").strip())
