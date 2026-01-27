@@ -34,7 +34,7 @@ def analyze_file(path: Path) -> dict:
 
     return {
         "word count": word_count,
-        "average sentence length": avg_sentence_length, #round to 2 decimals
+        "average sentence length": round(avg_sentence_length, 2),
         
         "polarity": sentiment.polarity,
         "subjectivity": sentiment.subjectivity,
