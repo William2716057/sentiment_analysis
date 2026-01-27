@@ -23,10 +23,19 @@ def analyze_file(path: Path) -> dict:
     #counts
     #words
     words = blob.words
+    word_count = len(words)
     #sentences
     sentences = blob.sentences
+    sentence_count = len(sentences)
     
+    avg_sentence_length = (
+        word_count / sentence_count if sentence_count > 0 else 0
+    )
+
     return {
+        "word count": word_count,
+        "average sentence length": avg_sentence_length, #round to 2 decimals
+        
         "polarity": sentiment.polarity,
         "subjectivity": sentiment.subjectivity,
         "label": label(sentiment.polarity),
