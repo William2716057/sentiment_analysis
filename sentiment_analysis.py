@@ -12,11 +12,18 @@ def analyze_file(path: Path) -> dict:
     blob = TextBlob(text)
     sentiment = blob.sentiment
     
+    #display word count
+    #sentence count
+    #average sentence length
+    #lexical diversity
+    #punctuation density
     return {
         "polarity": sentiment.polarity,
         "subjectivity": sentiment.subjectivity,
         "label": label(sentiment.polarity),
     }
+    #return
+
 def label(polarity):
     if polarity > 0.1:
         return "positive"
