@@ -10,6 +10,8 @@ def analyze_file(path: Path) -> dict:
         raise ValueError("File is empty")
 
     blob = TextBlob(text)
+    
+    #sentiment
     sentiment = blob.sentiment
     
     #display word count
@@ -17,6 +19,13 @@ def analyze_file(path: Path) -> dict:
     #average sentence length
     #lexical diversity
     #punctuation density
+
+    #counts
+    #words
+    words = blob.words
+    #sentences
+    sentences = blob.sentences
+    
     return {
         "polarity": sentiment.polarity,
         "subjectivity": sentiment.subjectivity,
