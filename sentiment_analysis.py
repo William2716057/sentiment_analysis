@@ -28,6 +28,12 @@ def analyze_file(path: Path) -> dict:
     sentences = blob.sentences
     sentence_count = len(sentences)
     
+    #lexical diversity
+    unique_words = set(word.lower() for word in words)
+    lexical_diversity = (
+        len(unique_words) / word_count if word_count > 0 else 0
+        )
+    
     avg_sentence_length = (
         word_count / sentence_count if sentence_count > 0 else 0
     )
@@ -35,6 +41,7 @@ def analyze_file(path: Path) -> dict:
     return {
         "word count": word_count,
         "average sentence length": round(avg_sentence_length, 2),
+        "lexical diversity": round(lexical_diversity, 4),
         
         "polarity": sentiment.polarity,
         "subjectivity": sentiment.subjectivity,
